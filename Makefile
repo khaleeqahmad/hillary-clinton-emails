@@ -11,7 +11,15 @@ input/HRCEmail_JulyWeb.zip:
 input/Clinton_Email_August_Release.zip:
 	mkdir -p input
 	curl http://graphics.wsj.com/hillary-clinton-email-documents/zips/Clinton_Email_August_Release.zip -o input/Clinton_Email_August_Release.zip
-INPUT_FILES=input/HRC_Email_296.zip input/HRCEmail_JuneWeb.zip input/HRCEmail_JulyWeb.zip input/Clinton_Email_August_Release.zip
+input/HRCEmail_SeptemberWeb.zip:
+	mkdir -p input
+	curl http://graphics.wsj.com/hillary-clinton-email-documents/zips/HRCEmail_SeptemberWeb.zip -o input/HRCEmail_SeptemberWeb.zip
+
+input/HRCEmail_OctWeb.zip:
+	mkdir -p input
+	curl http://graphics.wsj.com/hillary-clinton-email-documents/zips/HRCEmail_OctWeb.zip -o input/HRCEmail_OctWeb.zip
+
+INPUT_FILES=input/HRC_Email_296.zip input/HRCEmail_JuneWeb.zip input/HRCEmail_JulyWeb.zip input/Clinton_Email_August_Release.zip input/HRCEmail_SeptemberWeb.zip input/HRCEmail_OctWeb.zip
 input/metadata.csv:
 	mkdir -p input
 	python scripts/metadata.py
@@ -23,6 +31,8 @@ working/pdfs/.sentinel: $(INPUT_FILES)
 	unzip input/HRCEmail_JuneWeb.zip -d working/pdfs/june
 	unzip input/HRCEmail_JulyWeb.zip -d working/pdfs/july
 	unzip input/Clinton_Email_August_Release.zip -d working/pdfs/august
+	unzip input/HRCEmail_SeptemberWeb.zip -d working/pdfs/september
+	unzip input/HRCEmail_OctWeb.zip -d working/pdfs/october
 	touch working/pdfs/.sentinel
 unzip: working/pdfs/.sentinel
 
@@ -82,7 +92,13 @@ sqlite: output/database.sqlite
 release: output/database.sqlite output/hashes.txt
 	zip -r -X output/release-`date -u +'%Y-%m-%d-%H-%M-%S'` output/*
 
-all: csv sqlite hashes
+.PHONY: all requirements clean
+requirements:
+	pip install -r requirements.txt
+	
+
+all: requirements csv sqlite hashes
+	type -P pdftotext
 
 clean:
 	rm -rf working
