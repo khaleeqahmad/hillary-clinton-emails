@@ -57,7 +57,9 @@ for subdir, dirs, files in sorted(os.walk("working/rawText")):
         doc_number = os.path.splitext(filename)[0]
         locs = np.where(metadata["DocNumber"]==doc_number)[0]
         if len(locs) != 1:
-            raise Exception("There isn't exactly one matching filename for %s: %s" % (filename, locs))
+            #raise Exception("There isn't exactly one matching filename for %s: %s" % (filename, locs))
+            print "There isn't exactly one matching filename for %s: %s" % (filename, locs)
+            continue
         loc = locs[0]
         filepath = os.path.join(subdir, filename)
         raw_text = open(filepath).read()
