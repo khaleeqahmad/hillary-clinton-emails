@@ -19,7 +19,11 @@ input/HRCEmail_OctWeb.zip:
 	mkdir -p input
 	curl http://graphics.wsj.com/hillary-clinton-email-documents/zips/HRCEmail_OctWeb.zip -o input/HRCEmail_OctWeb.zip
 
-INPUT_FILES=input/HRC_Email_296.zip input/HRCEmail_JuneWeb.zip input/HRCEmail_JulyWeb.zip input/Clinton_Email_August_Release.zip input/HRCEmail_SeptemberWeb.zip input/HRCEmail_OctWeb.zip
+input/HRCEmail_NovWeb.zip:
+	mkdir -p input
+	curl http://graphics.wsj.com/hillary-clinton-email-documents/zips/HRCEmail_NovWeb.zip -o input/HRCEmail_NovWeb.zip
+
+INPUT_FILES=input/HRC_Email_296.zip input/HRCEmail_JuneWeb.zip input/HRCEmail_JulyWeb.zip input/Clinton_Email_August_Release.zip input/HRCEmail_SeptemberWeb.zip input/HRCEmail_OctWeb.zip input/HRCEmail_NovWeb.zip
 input/metadata.csv:
 	mkdir -p input
 	python scripts/metadata.py
@@ -33,6 +37,7 @@ working/pdfs/.sentinel: $(INPUT_FILES)
 	unzip input/Clinton_Email_August_Release.zip -d working/pdfs/august
 	unzip input/HRCEmail_SeptemberWeb.zip -d working/pdfs/september
 	unzip input/HRCEmail_OctWeb.zip -d working/pdfs/october
+	unzip input/HRCEmail_NovWeb.zip -d working/pdfs/november
 	touch working/pdfs/.sentinel
 unzip: working/pdfs/.sentinel
 
