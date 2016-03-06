@@ -28,6 +28,6 @@ writer = csv.writer(f)
 writer.writerow(header)
 
 for row in data["Results"]:
-    writer.writerow(["" if row[col] is None else ("%s" % row[col]).encode('utf-8') for col in header])
+    writer.writerow([row[col] for col in header])
 
 f.close()
