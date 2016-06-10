@@ -39,7 +39,6 @@ input/HRCEmail_Feb29thWeb.zip:
 	mkdir -p input
 	curl http://graphics.wsj.com/hillary-clinton-email-documents/zips/HRCEmail_Feb29thWeb.zip -o input/HRCEmail_Feb29thWeb.zip
 
-
 INPUT_FILES=input/HRC_Email_296.zip input/HRCEmail_JuneWeb.zip input/HRCEmail_JulyWeb.zip input/Clinton_Email_August_Release.zip input/HRCEmail_SeptemberWeb.zip input/HRCEmail_OctWeb.zip input/HRCEmail_NovWeb.zip input/HRCEmail_DecWeb.zip input/HRCEmail_Jan7thWeb.zip input/HRCEmail_Jan29thWeb.zip input/HRCEmail_Feb13thWeb.zip input/HRCEmail_Feb19thWeb.zip input/HRCEmail_Feb29thWeb.zip
 input/metadata.csv:
 	mkdir -p input
@@ -55,6 +54,7 @@ working/pdfs/.sentinel: $(INPUT_FILES)
 	unzip input/HRCEmail_SeptemberWeb.zip -d working/pdfs/september
 	unzip input/HRCEmail_OctWeb.zip -d working/pdfs/october
 	unzip input/HRCEmail_NovWeb.zip -d working/pdfs/november
+	unzip input/HRCEmail_DecWeb.zip -d working/pdfs/december
 	unzip input/HRCEmail_Jan7thWeb.zip -d working/pdfs/january7
 	unzip input/HRCEmail_Jan29thWeb.zip -d working/pdfs/january29
 	unzip input/HRCEmail_Feb13thWeb.zip -d working/pdfs/february13
@@ -122,7 +122,7 @@ release: output/database.sqlite output/hashes.txt
 .PHONY: all requirements clean
 requirements:
 	pip install -r requirements.txt
-	
+
 
 all: requirements csv sqlite hashes
 	type -P pdftotext
