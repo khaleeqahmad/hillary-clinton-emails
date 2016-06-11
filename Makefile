@@ -35,11 +35,17 @@ input/HRCEmail_Feb13thWeb.zip:
 input/HRCEmail_Feb19thWeb.zip:
 	mkdir -p input
 	curl http://graphics.wsj.com/hillary-clinton-email-documents/zips/HRCEmail_Feb19thWeb.zip -o input/HRCEmail_Feb19thWeb.zip
+
+	### Feb 26 not available on WSJ, so manually add to include/
+	# input/HRCEmail_Feb26thWeb.zip:
+	# 	mkdir -p input
+	# 	curl http://graphics.wsj.com/hillary-clinton-email-documents/zips/HRCEmail_Feb26thWeb.zip -o input/HRCEmail_Feb29thWeb.zip
+
 input/HRCEmail_Feb29thWeb.zip:
 	mkdir -p input
 	curl http://graphics.wsj.com/hillary-clinton-email-documents/zips/HRCEmail_Feb29thWeb.zip -o input/HRCEmail_Feb29thWeb.zip
 
-INPUT_FILES=input/HRC_Email_296.zip input/HRCEmail_JuneWeb.zip input/HRCEmail_JulyWeb.zip input/Clinton_Email_August_Release.zip input/HRCEmail_SeptemberWeb.zip input/HRCEmail_OctWeb.zip input/HRCEmail_NovWeb.zip input/HRCEmail_DecWeb.zip input/HRCEmail_Jan7thWeb.zip input/HRCEmail_Jan29thWeb.zip input/HRCEmail_Feb13thWeb.zip input/HRCEmail_Feb19thWeb.zip input/HRCEmail_Feb29thWeb.zip
+INPUT_FILES=input/HRC_Email_296.zip input/HRCEmail_JuneWeb.zip input/HRCEmail_JulyWeb.zip input/Clinton_Email_August_Release.zip input/HRCEmail_SeptemberWeb.zip input/HRCEmail_OctWeb.zip input/HRCEmail_NovWeb.zip input/HRCEmail_DecWeb.zip input/HRCEmail_Jan7thWeb.zip input/HRCEmail_Jan29thWeb.zip input/HRCEmail_Feb13thWeb.zip input/HRCEmail_Feb19thWeb.zip input/HRCEmail_Feb29thWeb.zip input/HRCEmail_Feb26thWeb.zip
 input/metadata.csv:
 	mkdir -p input
 	python scripts/metadata.py
@@ -61,6 +67,7 @@ working/pdfs/.sentinel: $(INPUT_FILES)
 	unzip input/HRCEmail_Feb13thWeb.zip -d working/pdfs/february13
 	unzip input/HRCEmail_Feb19thWeb.zip -d working/pdfs/february19
 	unzip input/HRCEmail_Feb29thWeb.zip -d working/pdfs/february29
+	unzip input/HRCEmail_Feb26thWeb.zip -d working/pdfs/february26
 unzip: working/pdfs/.sentinel
 
 working/rawText/.sentinel: working/pdfs/.sentinel
