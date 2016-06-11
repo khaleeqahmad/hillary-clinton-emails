@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-i
 import os
 import re
 from subprocess import call

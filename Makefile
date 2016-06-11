@@ -47,6 +47,7 @@ input: $(INPUT_FILES) input/metadata.csv
 
 working/pdfs/.sentinel: $(INPUT_FILES)
 	mkdir -p working/pdfs
+	touch working/pdfs/.sentinel
 	unzip input/HRC_Email_296.zip -d working/pdfs/may
 	unzip input/HRCEmail_JuneWeb.zip -d working/pdfs/june
 	unzip input/HRCEmail_JulyWeb.zip -d working/pdfs/july
@@ -60,18 +61,17 @@ working/pdfs/.sentinel: $(INPUT_FILES)
 	unzip input/HRCEmail_Feb13thWeb.zip -d working/pdfs/february13
 	unzip input/HRCEmail_Feb19thWeb.zip -d working/pdfs/february19
 	unzip input/HRCEmail_Feb29thWeb.zip -d working/pdfs/february29
-	touch working/pdfs/.sentinel
 unzip: working/pdfs/.sentinel
 
 working/rawText/.sentinel: working/pdfs/.sentinel
 	mkdir -p working/rawText
-	python scripts/pdfToRawText.py
 	touch working/rawText/.sentinel
+	python scripts/pdfToRawText.py
 
 working/bodyText/.sentinel: working/rawText/.sentinel
 	mkdir -p working/bodyText
-	python scripts/bodyText.py
 	touch working/bodyText/.sentinel
+	python scripts/bodyText.py
 text: working/bodyText/.sentinel
 
 input/emailsNoId.csv: working/rawText/.sentinel working/bodyText/.sentinel input/metadata.csv
