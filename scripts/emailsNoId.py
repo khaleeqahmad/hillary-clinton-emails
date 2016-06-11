@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-i
 import arrow
 import csv
 import os
@@ -11,7 +12,7 @@ def extract_release_type(raw_text):
         return "RELEASE IN PART"
     if re.search(r"RELEASE\s+IN\s+FULL", raw_text):
         return "RELEASE IN FULL"
-    return "UNKNOWN" 
+    return "UNKNOWN"
 
 def extract_field(regex, raw_text):
     m=re.search(regex, raw_text)

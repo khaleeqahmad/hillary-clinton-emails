@@ -1,9 +1,10 @@
+# -*- coding: utf-8 -*-i
 import csv
 import json
 import re
 import requests
 
-response = requests.get("https://foia.state.gov/searchapp/Search/SubmitSimpleQuery",    
+response = requests.get("https://foia.state.gov/searchapp/Search/SubmitSimpleQuery",
     params = {"searchText": "*",
               "beginDate": "false",
               "endDate": "false",

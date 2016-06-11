@@ -1,5 +1,6 @@
-import numpy as np 
-import pandas as pd 
+# -*- coding: utf-8 -*-i		
+import numpy as np
+import pandas as pd
 
 def normalize_address(raw_address):
     for c in ["'", ",", "°", "•", "`", '"', "‘", "-"]:
