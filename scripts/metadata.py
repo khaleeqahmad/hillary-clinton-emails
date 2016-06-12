@@ -29,6 +29,6 @@ writer = csv.writer(f)
 writer.writerow(header)
 
 for row in data["Results"]:
-    writer.writerow([row[col] for col in header])
+    writer.writerow([ unicode(row[col]).encode('utf') for col in header])
 
 f.close()
