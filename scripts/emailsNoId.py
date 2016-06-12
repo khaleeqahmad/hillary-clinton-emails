@@ -21,6 +21,10 @@ def extract_field(regex, raw_text):
     return ""
 
 def metadata_timestamp_to_string(timestamp):
+    try:
+        timestamp = int(timestamp)
+    except ValueError:
+        return ""
     if np.isnan(timestamp):
         return ""
     return str(arrow.get(timestamp/1000))
